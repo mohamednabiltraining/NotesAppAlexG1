@@ -1,4 +1,4 @@
-package com.route.splash;
+package com.route.NotesApp;
 
 import org.junit.Test;
 

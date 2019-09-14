@@ -1,4 +1,4 @@
-package com.route.splash.DataBase;
+package com.route.NotesApp.DataBase;
 
 import android.content.Context;
 
@@ -6,8 +6,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.route.splash.DataBase.DAOs.NotesDao;
-import com.route.splash.DataBase.Model.Note;
+import com.route.NotesApp.DataBase.DAOs.NotesDao;
+import com.route.NotesApp.DataBase.Model.Note;
 
 /**
  * Created by Mohamed Nabil Mohamed on 9/14/2019.
@@ -20,7 +20,7 @@ public abstract class MyDataBase extends RoomDatabase {
 
     public abstract NotesDao notesDao();
 
-    private MyDataBase(){
+    public MyDataBase(){
 
     }
     public static MyDataBase getInstance(Context context){

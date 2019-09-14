@@ -1,4 +1,4 @@
-package com.route.splash.DataBase.Model;
+package com.route.NotesApp.DataBase.Model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

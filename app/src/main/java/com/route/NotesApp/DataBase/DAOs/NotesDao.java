@@ -1,4 +1,4 @@
-package com.route.splash.DataBase.DAOs;
+package com.route.NotesApp.DataBase.DAOs;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.route.splash.DataBase.Model.Note;
+import com.route.NotesApp.DataBase.Model.Note;
 
 import java.util.List;
 

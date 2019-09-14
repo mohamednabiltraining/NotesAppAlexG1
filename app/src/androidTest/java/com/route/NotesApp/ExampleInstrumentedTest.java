@@ -1,4 +1,4 @@
-package com.route.splash;
+package com.route.NotesApp;
 
 import android.content.Context;
 
