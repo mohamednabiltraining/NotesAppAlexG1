@@ -3,7 +3,6 @@ package com.route.NotesApp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -75,7 +74,6 @@ public class HomeActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 MyDataBase.getInstance(getApplication()).notesDao().addNote(noteToDelte);
                                 adapter.updateData(getnotes());
-
                             }
                         }).show();
 
