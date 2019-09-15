@@ -44,6 +44,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
+    public Note getNote(int pos){
+        return notes.get(pos);
+    }
+
     @Override
     public int getItemCount() {
         if(notes==null)
