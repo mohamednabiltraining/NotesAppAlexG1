@@ -85,7 +85,8 @@ public class HomeActivity extends AppCompatActivity {
 
                                final Note noteToDelete = adapter.getNote(viewHolder.getAdapterPosition());
                                 MyDataBase.getInstance(getApplication()).notesDao().deleteNote(noteToDelete);
-                               adapter.updateData(notesList);
+                                ArrayList<Note>  newNotesArray = (ArrayList<Note>) getnotes();
+                               adapter.updateData(newNotesArray);
 
                                Snackbar.make(findViewById(R.id.rootLayout),"note deleted",Snackbar.LENGTH_LONG)
                                        .setAction("Undo", new View.OnClickListener() {
