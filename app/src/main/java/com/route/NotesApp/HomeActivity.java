@@ -1,10 +1,12 @@
 package com.route.NotesApp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -52,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onStart();
 
        final ArrayList<Note>  notesList = (ArrayList<Note>) getnotes();
-
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -60,22 +62,38 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-                //delete item
-                final Note noteToDelte = adapter.getNote(viewHolder.getAdapterPosition());
-                MyDataBase.getInstance(getApplication()).notesDao().deleteNote(noteToDelte);
-                notesList.remove(noteToDelte);
-                adapter.updateData(notesList);
-
-                Snackbar.make(findViewById(R.id.rootLayout),"note deleted",Snackbar.LENGTH_LONG)
-                        .setAction("Undo", new View.OnClickListener() {
+            public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
+               alertDialog.setTitle("confirm message").setMessage("Want to delete?")
+                        .setNeutralButton("cancel", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(View v) {
-                                MyDataBase.getInstance(getApplication()).notesDao().addNote(noteToDelte);
-                                adapter.updateData(getnotes());
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
                             }
-                        }).show();
+                        })
+                       .setPositiveButton("confirm", new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+
+
+                               //delete item
+                               final Note noteToDelte = adapter.getNote(viewHolder.getAdapterPosition());
+                               MyDataBase.getInstance(getApplication()).notesDao().deleteNote(noteToDelte);
+                               notesList.remove(noteToDelte);
+                               adapter.updateData(notesList);
+
+                               Snackbar.make(findViewById(R.id.rootLayout),"note deleted",Snackbar.LENGTH_LONG)
+                                       .setAction("Undo", new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               MyDataBase.getInstance(getApplication()).notesDao().addNote(noteToDelte);
+                                               adapter.updateData(getnotes());
+                                           }
+                                       }).show();
+
+                           }
+                       })
+                        .setCancelable(false).show();
+
 
             }
         }).attachToRecyclerView(recyclerView);
