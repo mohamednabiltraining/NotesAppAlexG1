@@ -37,6 +37,8 @@ public class HomeActivity extends AppCompatActivity {
         layoutManager =new LinearLayoutManager(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+
+
         FloatingActionButton fab = findViewById(R.id.add_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,10 +107,18 @@ public class HomeActivity extends AppCompatActivity {
             }
         }).attachToRecyclerView(recyclerView);
 
-
-
-
         adapter.updateData(notesList);
+
+        // note item click listneer
+        adapter.setOnItemClick(new NotesAdapter.onItemClick() {
+            @Override
+            public void onClick(int pos) {
+              String content =   notesList.get(pos).getContent();
+              Intent intent = new Intent(HomeActivity.this,NoteActivity.class);
+              intent.putExtra("content",content);
+              startActivity(intent);
+            }
+        });
     }
 
     public List<Note> getnotes(){
