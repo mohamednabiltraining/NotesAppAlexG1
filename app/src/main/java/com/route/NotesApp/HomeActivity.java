@@ -72,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
-                                adapter.updateData(notesList);
+                                adapter.updateData(getnotes());
 
                             }
                         })
