@@ -20,6 +20,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
 
     List<Note> notes ;
 
+
     public NotesAdapter(List<Note> notes) {
         this.notes = notes;
     }
@@ -33,10 +34,17 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Note note = notes.get(position);
         holder.title.setText(note.getTitle());
         holder.time.setText(note.getDateTime());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClick.onClick(position);
+            }
+        });
+
     }
 
     public void updateData(List<Note>notes){
@@ -53,6 +61,15 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         if(notes==null)
             return 0;
         return notes.size();
+    }
+    onItemClick onItemClick;
+
+    public void setOnItemClick(NotesAdapter.onItemClick onItemClick) {
+        this.onItemClick = onItemClick;
+    }
+
+    public  interface onItemClick{
+        void onClick(int pos);
     }
 
     public class  ViewHolder extends RecyclerView.ViewHolder{
