@@ -30,9 +30,8 @@ dependencies {
     // For Kotlin use kapt instead of annotationProcessor
 
 
-
-    compile 'com.daimajia.easing:library:2.0@aar'
-    compile 'com.daimajia.androidanimations:library:2.3@aar'
+    implementation 'com.daimajia.easing:library:2.0@aar'
+    implementation 'com.daimajia.androidanimations:library:2.3@aar'
 
 
     testImplementation 'junit:junit:4.12'
