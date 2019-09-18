@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 import com.route.NotesApp.DataBase.Model.Note;
 import com.route.NotesApp.DataBase.MyDataBase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,29 +112,21 @@ public class HomeActivity extends AppCompatActivity {
         adapter.updateData(notesList);
 
         // note item click listneer
-        adapter.setOnItemClick(new NotesAdapter.onItemClick() {
+        adapter.setOnClickListener(new NotesAdapter.onClickListener() {
             @Override
             public void onClick(int pos) {
-              String content =   notesList.get(pos).getContent();
+              Note note =   notesList.get(pos);
               Intent intent = new Intent(HomeActivity.this,NoteActivity.class);
-              intent.putExtra("content",content);
+                Gson gson = new Gson();
+                String myJson = gson.toJson(note);
+                intent.putExtra("myjson",myJson);
+
+
               startActivity(intent);
             }
         });
 
-        adapter.setOnButtonClick(new NotesAdapter.onItemClick() {
-            @Override
-            public void onClick(int pos) {
 
-                Intent intent = new Intent(HomeActivity.this, UpdateActivity.class);
-                ArrayList<String> note = new ArrayList<>();
-                note.add(notesList.get(pos).getTitle());
-                note.add(notesList.get(pos).getContent());
-                note.add(notesList.get(pos).getDateTime());
-                intent.putExtra("noteId",notesList.get(pos).getId());
-                intent.putStringArrayListExtra("note",note);
-            }
-        });
     }
 
     public List<Note> getnotes(){

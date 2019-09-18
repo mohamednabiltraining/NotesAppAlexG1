@@ -10,40 +10,39 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.route.NotesApp.DataBase.Model.Note;
 import com.route.NotesApp.DataBase.MyDataBase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class UpdateActivity extends AppCompatActivity {
-    ArrayList<String> oldNote;
+    Note oldNote;
     Note note;
+    Gson gson = new Gson();
 
 
     protected EditText title;
     protected EditText content;
     protected TextView datetime;
-    protected Button update;
+    protected TextView update;
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
-        title = findViewById(R.id.title);
-        content =  findViewById(R.id.note_content);
-        datetime = findViewById(R.id.datetime);
-        update = findViewById(R.id.update);
+        title = findViewById(R.id.update_title);
+        content =  findViewById(R.id.update_content);
+        datetime = findViewById(R.id.update_datetime);
+        update = findViewById(R.id.save_update);
 
 
-        oldNote = getIntent().getStringArrayListExtra("note");
-        note.setTitle(oldNote.get(0));
-        note.setContent(oldNote.get(1));
-        note.setDateTime(oldNote.get(2));
-       note.setId(getIntent().getIntExtra("noteId",-1));
-
-       title.setText(note.getTitle());
-       content.setText(note.getContent());
+        note =  gson.fromJson(getIntent().getStringExtra("myjosn"),Note.class) ;
+        String titleS = note.getTitle();
+        title.setText(titleS);
+      content.setText(note.getContent());
        datetime.setText(note.getDateTime());
 
        update.setOnClickListener(new View.OnClickListener() {

@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 /**
  * Created by Mohamed Nabil Mohamed on 9/14/2019.
  * m.nabil.fci2015@gmail.com

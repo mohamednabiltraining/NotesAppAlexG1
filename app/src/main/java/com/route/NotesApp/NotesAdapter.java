@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,15 +42,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClick.onClick(position);
-            }
-        });
-
-        holder.update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                onButtonClick.onClick(position);
+                onClickListener.onClick(position);
             }
         });
 
@@ -72,31 +63,26 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
             return 0;
         return notes.size();
     }
-    onItemClick onItemClick;
-    onItemClick onButtonClick;
+    onClickListener onClickListener;
 
-    public void setOnButtonClick(NotesAdapter.onItemClick onButtonClick) {
-        this.onButtonClick = onButtonClick;
+    public void setOnClickListener(onClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
-    public void setOnItemClick(NotesAdapter.onItemClick onItemClick) {
-        this.onItemClick = onItemClick;
-    }
-
-    public  interface onItemClick{
+    public  interface onClickListener {
         void onClick(int pos);
     }
 
     public class  ViewHolder extends RecyclerView.ViewHolder{
-        TextView title;
-        TextView time;
-        Button update;
+        public TextView title;
+        public TextView time;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title=itemView.findViewById(R.id.title);
             time=itemView.findViewById(R.id.time);
-            update = itemView.findViewById(R.id.update_btn);
+
         }
     }
 }
