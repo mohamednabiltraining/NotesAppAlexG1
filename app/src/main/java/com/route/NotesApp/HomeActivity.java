@@ -122,10 +122,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public List<Note> getnotes(){
-        List<Note> notesList= MyDataBase.getInstance(this)
+
+        return MyDataBase.getInstance(this)
                 .notesDao()
                 .getAllNotes();
-
-        return notesList;
     }
 }

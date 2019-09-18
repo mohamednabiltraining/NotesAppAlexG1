@@ -12,11 +12,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 
+import com.daimajia.androidanimations.library.YoYo;
 import com.route.NotesApp.DataBase.Model.Note;
 import com.route.NotesApp.DataBase.MyDataBase;
 import com.route.NotesApp.base.BaseActivity;
 
 import java.util.Calendar;
+
+import static com.daimajia.androidanimations.library.Techniques.Shake;
+import static com.daimajia.androidanimations.library.Techniques.Tada;
 
 public class AddNoteActivity extends BaseActivity implements View.OnClickListener {
 
@@ -43,15 +47,18 @@ public class AddNoteActivity extends BaseActivity implements View.OnClickListene
             String contentS = content.getText().toString();
 
             //validate data
-            if (contentS.equals("") || titleS.equals("")){
-             new AlertDialog.Builder(this)
-                        .setMessage("the fileds can't be empty").setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).setCancelable(false).show();
-            }else {
+
+
+
+
+//             new AlertDialog.Builder(this)
+//                        .setMessage("the fileds can't be empty").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                            }
+//                        }).setCancelable(false).show();
+                if ((validateEmptyData(title) && validateEmptyData(content) && validateEmptyData(datetime))==true){
 
                 // add note to database
                 Note note = new Note(titleS, contentS, noteTime);
@@ -92,4 +99,17 @@ public class AddNoteActivity extends BaseActivity implements View.OnClickListene
         add = (Button) findViewById(R.id.add);
         add.setOnClickListener(AddNoteActivity.this);
     }
+
+    public boolean  validateEmptyData(TextView view){
+
+        if (view.getText().toString().equals("")){
+            view.setError("feild can't be empty");
+            YoYo.with(Shake).duration(2000).playOn(view);
+            return false;
+        }
+
+
+        return true;
+    }
+
 }
