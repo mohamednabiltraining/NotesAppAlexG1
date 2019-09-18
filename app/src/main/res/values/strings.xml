@@ -7,4 +7,6 @@
     <string name="note_added_successfully">Note added successfully</string>
     <string name="ok">ok</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="update">update</string>
+    <string name="update_note">update note</string>
 </resources>

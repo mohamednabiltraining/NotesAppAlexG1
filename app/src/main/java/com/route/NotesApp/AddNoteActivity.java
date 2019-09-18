@@ -1,7 +1,9 @@
 package com.route.NotesApp;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,13 +11,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+
+import com.daimajia.androidanimations.library.YoYo;
 import com.route.NotesApp.DataBase.Model.Note;
 import com.route.NotesApp.DataBase.MyDataBase;
 import com.route.NotesApp.base.BaseActivity;
 
 import java.util.Calendar;
 
+import static com.daimajia.androidanimations.library.Techniques.Shake;
+import static com.daimajia.androidanimations.library.Techniques.Tada;
+
 public class AddNoteActivity extends BaseActivity implements View.OnClickListener {
+
 
     protected EditText title;
     protected EditText content;
@@ -37,18 +45,35 @@ public class AddNoteActivity extends BaseActivity implements View.OnClickListene
         if (view.getId() == R.id.add) {
             String titleS = title.getText().toString();
             String contentS = content.getText().toString();
-            Note note =new Note(titleS,contentS,noteTime);
-            MyDataBase.getInstance(this)
-                    .notesDao()
-                    .addNote(note);
-            showMessage(R.string.note_added_successfully, R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    finish();
-                }
-            },false);
+
+            //validate data
+
+
+
+
+//             new AlertDialog.Builder(this)
+//                        .setMessage("the fileds can't be empty").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                            }
+//                        }).setCancelable(false).show();
+                if ((validateEmptyData(title) && validateEmptyData(content) && validateEmptyData(datetime))==true){
+
+                // add note to database
+                Note note = new Note(titleS, contentS, noteTime);
+                MyDataBase.getInstance(this)
+                        .notesDao()
+                        .addNote(note);
+                showMessage(R.string.note_added_successfully, R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                finish();
+                            }
+                        }, false);
+            }
 
         } else if (view.getId() == R.id.datetime) {
             Calendar calendar = Calendar.getInstance();
@@ -65,6 +90,7 @@ public class AddNoteActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+
     private void initView() {
         title = (EditText) findViewById(R.id.title);
         content = (EditText) findViewById(R.id.content);
@@ -73,4 +99,17 @@ public class AddNoteActivity extends BaseActivity implements View.OnClickListene
         add = (Button) findViewById(R.id.add);
         add.setOnClickListener(AddNoteActivity.this);
     }
+
+    public boolean  validateEmptyData(TextView view){
+
+        if (view.getText().toString().equals("")){
+            view.setError("feild can't be empty");
+            YoYo.with(Shake).duration(2000).playOn(view);
+            return false;
+        }
+
+
+        return true;
+    }
+
 }

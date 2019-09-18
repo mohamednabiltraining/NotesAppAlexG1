@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
@@ -34,6 +35,9 @@
             app:layout_constraintTop_toBottomOf="@id/title"
             tools:text="title titel"
             />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
