@@ -5,18 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.route.NotesApp.NoteActivity">
-
+    <TextView
+        android:id="@+id/titleNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:layout_margin="12dp"
+        android:textSize="35sp"
+       />
     <TextView
         android:id="@+id/update"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="12dp"
         android:text="@string/update"
         android:gravity="center"
         android:background="@color/colorPrimary"
-        android:textSize="35sp"
+        android:textColor="#fff"
+        android:textSize="20sp"
         android:padding="12dp"/>
     <TextView
         android:id="@+id/note_content"

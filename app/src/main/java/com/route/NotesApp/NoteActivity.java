@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class NoteActivity extends AppCompatActivity {
     Gson gson= new Gson();
-
+    TextView noteTitle;
     TextView noteContent;
     TextView update;
 
@@ -23,14 +23,15 @@ public class NoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
-
+        noteTitle = findViewById(R.id.titleNote);
         update = findViewById(R.id.update);
         noteContent= findViewById(R.id.note_content);
 
-        final Note note  =gson.fromJson(getIntent().getStringExtra("myjson"),Note.class);
+        final Note note  = gson.fromJson(getIntent().getStringExtra("myjson"),Note.class);
         String content = note.getContent();
-
         noteContent.setText(content);
+        String Title = note.getTitle();
+        noteTitle.setText(note.getTitle());
         // start update activity
        update.setOnClickListener(new View.OnClickListener() {
            @Override

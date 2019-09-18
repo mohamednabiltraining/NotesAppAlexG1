@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/update"
+        android:text="@string/update_note"
         android:textSize="32sp"
         android:gravity="center"
         android:layout_margin="12dp"
@@ -33,8 +33,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:gravity="start"
-        android:lines="6"
-        android:maxLines="6"
+        android:lines="12"
+        android:maxLines="12"
         android:hint="@string/content"
         />
     <TextView
@@ -55,6 +55,8 @@
         android:text="@string/update"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorWhite"
+        android:textSize="35sp"
+        android:gravity="center"
         />
 
 
