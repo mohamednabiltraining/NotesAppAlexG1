@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,10 +46,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
                 onItemClick.onClick(position);
             }
         });
-        holder.updaet.setOnClickListener(new View.OnClickListener() {
+
+        holder.update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClick.onClick(position);
+
+                onButtonClick.onClick(position);
             }
         });
 
@@ -72,6 +75,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     onItemClick onItemClick;
     onItemClick onButtonClick;
 
+    public void setOnButtonClick(NotesAdapter.onItemClick onButtonClick) {
+        this.onButtonClick = onButtonClick;
+    }
+
     public void setOnItemClick(NotesAdapter.onItemClick onItemClick) {
         this.onItemClick = onItemClick;
     }
@@ -83,12 +90,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     public class  ViewHolder extends RecyclerView.ViewHolder{
         TextView title;
         TextView time;
-        Button updaet;
+        Button update;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             title=itemView.findViewById(R.id.title);
             time=itemView.findViewById(R.id.time);
-            updaet = itemView.findViewById(R.id.update);
+            update = itemView.findViewById(R.id.update_btn);
         }
     }
 }

@@ -119,6 +119,20 @@ public class HomeActivity extends AppCompatActivity {
               startActivity(intent);
             }
         });
+
+        adapter.setOnButtonClick(new NotesAdapter.onItemClick() {
+            @Override
+            public void onClick(int pos) {
+
+                Intent intent = new Intent(HomeActivity.this, UpdateActivity.class);
+                ArrayList<String> note = new ArrayList<>();
+                note.add(notesList.get(pos).getTitle());
+                note.add(notesList.get(pos).getContent());
+                note.add(notesList.get(pos).getDateTime());
+                intent.putExtra("noteId",notesList.get(pos).getId());
+                intent.putStringArrayListExtra("note",note);
+            }
+        });
     }
 
     public List<Note> getnotes(){
