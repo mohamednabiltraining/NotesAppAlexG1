@@ -51,6 +51,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         return notes.size();
     }
 
+    public Note getNote(int adapterPosition) {
+        return notes.get(adapterPosition);
+    }
+
     public class  ViewHolder extends RecyclerView.ViewHolder{
         TextView title;
         TextView time;
